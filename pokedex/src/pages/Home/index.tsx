@@ -6,6 +6,7 @@ import { Button } from "../../components/Button";
 import api from "../../service/api";
 import { FlatList, Text } from "react-native";
 import { Card, Pokemon, PokemonType } from "../../components/Card";
+import { FadeAnimation } from "../../components/FadeAnimation";
 
 
 
@@ -19,7 +20,7 @@ export function Home(){
     const [pokemons, setPokemons] = useState<Pokemon[]>([])
     useEffect(()=> {
         async function getAllPokemons(){
-            const response = await api.get('/pokemon')
+            const response = await api.get('pokemon?limit=20')
             const { results } = response.data;
 
             const payloadPokemons = await Promise.all(
@@ -50,10 +51,13 @@ export function Home(){
         }
     }
     return <S.Container>
-        <FlatList data={pokemons} 
+        <FlatList 
+        data={pokemons} 
         keyExtractor={pokemon => pokemon.id.toString()} 
         renderItem={({item:pokemon})=>(
-            <Card data={pokemon} />
+            <FadeAnimation>
+             <Card data={pokemon} />
+            </FadeAnimation>
         )}
         />
     </S.Container>

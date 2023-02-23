@@ -22,7 +22,6 @@ type CardProps = {
 
 
 export function Card({data, ...rest}: CardProps){
-    console.log(data)
     return (
         <S.PokemonCard type={data.types[0].type.name} {...rest}>
             <S.LeftSide>
@@ -32,14 +31,17 @@ export function Card({data, ...rest}: CardProps){
 
                 <S.PokemonContentType>
                     {data.types.map(pokemonType =>
-                        <S.PokemonType  type={pokemonType.type.name}>
-                        <S.PokemonTypeText key={pokemonType.type.name}>
+                    <S.PokemonType  
+                    type={pokemonType.type.name} 
+                    key={pokemonType.type.name}>
+                        <S.PokemonTypeText >
                             {pokemonType.type.name}
                         </S.PokemonTypeText>
                     </S.PokemonType>
                     )}
                 </S.PokemonContentType>
             </S.LeftSide>
+            
             <S.RightSide>
                 <S.PokeballDetail source={pokeball} />
                 <S.PokemonImage source={{uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`}} />
