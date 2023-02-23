@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { TouchableOpacityProps } from 'react-native';
 
 import * as S from './style'
 
@@ -8,8 +8,8 @@ type Props = {
 
 }& TouchableOpacityProps
 
-export function Button ({title}: Props){
-    return <S.Container>
+export function Button ({title, ... rest}: Props){
+    return <S.Container {... rest}>
         <S.Title>{title}</S.Title>
     </S.Container>
 }
